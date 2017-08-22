@@ -1,0 +1,18 @@
+#!/usr/bin/php
+<?php
+
+use Calculator\Calculator;
+
+spl_autoload_register(function ($class) {
+    require_once __NAMESPACE__ .  $class . '.php';
+});
+
+/**
+ * Simple command line getter
+ */
+
+$params = implode(" ",array_slice($argv, 1, NULL, true));
+
+$calculator = new Calculator($params);
+
+echo $calculator->getErrors() ? implode(';' . PHP_EOL, $calculator->getErrors()) : $calculator->getResult();
